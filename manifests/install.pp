@@ -1,5 +1,5 @@
 class xcode_tools::install {
-  if $::xcode_tools_present == false {
+  if $facts['xcode_tools_present'] == false {
 
     file {'/private/tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress':
       ensure => 'present'
@@ -11,5 +11,11 @@ class xcode_tools::install {
     } ->
 
     exec {'/bin/rm -f private/tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress': }
+
   }
+
+  unless $facts['xcode_license_accepted'] {
+    exec { '/usr/bin/xcodebuild -license accept': }
+  }
+
 }
