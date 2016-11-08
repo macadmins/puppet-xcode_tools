@@ -5,6 +5,8 @@ class xcode_tools::install {
       ensure => 'present'
     } ->
 
+    exec {'/usr/bin/xcode-select -r': } ->
+
     exec { "/usr/sbin/softwareupdate -i \"${xcode_product}\" --verbose":
       logoutput => true,
       timeout   => 0,
@@ -14,7 +16,7 @@ class xcode_tools::install {
 
   }
 
-  unless $facts['xcode_license_accepted'] {
+  if $facts['xcode_license_accepted'] == false and  $facts['xcode_command_line_tools'] == false {
     exec { '/usr/bin/xcodebuild -license accept': }
   }
 
