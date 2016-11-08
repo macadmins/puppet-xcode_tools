@@ -5,7 +5,11 @@ Facter.add(:xcode_active_directory) do
     if $CHILD_STATUS.exitstatus.nonzero?
       nil
     else
-      output
+      if File.exist?(output.to_s.strip)
+        output
+      else
+        nil
+      end
     end
   end
 end
