@@ -4,12 +4,10 @@ Facter.add(:xcode_active_directory) do
     output = Facter::Util::Resolution.exec('/usr/bin/xcode-select -p')
     if $CHILD_STATUS.exitstatus.nonzero?
       nil
+    elsif File.exist?(output.to_s.strip)
+      output
     else
-      if File.exist?(output.to_s.strip)
-        output
-      else
-        nil
-      end
+      nil
     end
   end
 end
