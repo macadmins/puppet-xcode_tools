@@ -1,8 +1,9 @@
-require 'puppet/util/plist'
-
 Facter.add(:xcode_license_accepted) do
   confine kernel: 'Darwin'
   setcode do
+    
+    require 'puppet/util/plist'
+
     xcode_active_directory = Facter.value(:xcode_active_directory)
     if xcode_active_directory.nil?
       # no tools installed
