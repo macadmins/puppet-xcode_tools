@@ -12,6 +12,8 @@ Facter.add(:xcode_product) do
           break
         end
       end
+      temp_file = '/private/tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress'
+      File.delete(temp_file) if File.exist?(temp_file)
       output.strip
     end
   end
