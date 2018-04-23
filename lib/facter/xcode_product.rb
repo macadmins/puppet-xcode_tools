@@ -9,7 +9,6 @@ Facter.add(:xcode_product) do
       swupd_out.each_line do |line|
         if line.include?('*') && line.include?('Command Line')
           output = line.sub! '   * ', ''
-          break
         end
       end
       temp_file = '/private/tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress'
