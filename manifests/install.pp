@@ -24,7 +24,7 @@ class xcode_tools::install {
     apple_package{'macOS_SDK_headers':
       source => $facts['xcode_sdk_headers_pkg_path'],
       verssion => '10.0.0.0.1.1535735448',
-      receipt => "com.apple.pkg.macOS_SDK_headers_for_macOS_${facts['os']['macosx']['version']['major'}"
+      receipt => "com.apple.pkg.macOS_SDK_headers_for_macOS_${facts['os']['macosx']['version']['major']}"
     }
   }
 
