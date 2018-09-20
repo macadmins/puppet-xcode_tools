@@ -20,4 +20,12 @@ class xcode_tools::install {
     exec { '/usr/bin/xcodebuild -license accept': }
   }
 
+  if versioncmp($facts['os']['macosx']['version']['major'], '10.14') <= 0 and $facts['xcode_sdk_headers_pkg_path']{
+    apple_package{'macOS_SDK_headers':
+      source => $facts['xcode_sdk_headers_pkg_path'],
+      verssion => '10.0.0.0.1.1535735448',
+      receipt => 'com.apple.pkg.macOS_SDK_headers_for_macOS_10.14'
+    }
+  }
+
 }
