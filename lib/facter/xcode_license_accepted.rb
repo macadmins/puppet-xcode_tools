@@ -1,7 +1,7 @@
 Facter.add(:xcode_license_accepted) do
   confine kernel: 'Darwin'
   setcode do
-    
+
     require 'puppet/util/plist'
 
     xcode_active_directory = Facter.value(:xcode_active_directory)
@@ -15,7 +15,8 @@ Facter.add(:xcode_license_accepted) do
       # we need to check license
       license_plist = '/Library/Preferences/com.apple.dt.Xcode.plist'
 
-      result = false unless File.exist? license_plist
+      # if the file is missing, user hasn't accepted license
+      return false unless File.exist? license_plist
 
       license_plist_data = Puppet::Util::Plist.read_plist_file(license_plist)
 
