@@ -5,7 +5,7 @@ xcode_version_plist = '/Applications/Xcode.app/Contents/version.plist'
 Facter.add(:xcode_build_version) do
   confine kernel: 'Darwin'
   setcode do
-    version = '0000'
+    version = nil
     if File.exist?(xcode_version_plist)
       plist = Puppet::Util::Plist.read_plist_file(xcode_version_plist)
       if plist.include? 'ProductBuildVersion'
